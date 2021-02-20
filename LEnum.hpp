@@ -4,6 +4,67 @@ struct {
 	short id;
 } typedef LEnum;
 
+enum LInst {
+	I_OP,
+	I_SET,
+	I_READ,
+	I_WRITE,
+	I_DRAW,
+	I_PRINT,
+	I_DRAWFLUSH,
+	I_PRINTFLUSH,
+	I_GETLINK,
+	I_CONTROL,
+	I_RADAR,
+	I_SENSOR,
+	I_JUMP,
+	I_UBIND,
+	I_UCONTROL,
+	I_ULOCATE
+};
+
+enum OpInst {
+	I_OP_NOOP,
+	I_OP_ADD,
+	I_OP_SUBTRACT,
+	I_OP_MUL,
+	I_OP_DIV,
+	I_OP_IDIV,
+	I_OP_MOD,
+	I_OP_POW,
+	I_OP_EQUAL,
+	I_OP_NOTEQUAL,
+	I_OP_LAND,
+	I_OP_LESSTHAN,
+	I_OP_LESSTHANEQ,
+	I_OP_SHL,
+	I_OP_SHR,
+	I_OP_OR,
+	I_OP_AND,
+	I_OP_XOR,
+	I_OP_NOT,
+	I_OP_MAX,
+	I_OP_MIN,
+	I_OP_ATAN2, // angle
+	I_OP_DST, // len
+	I_OP_NOISE,
+	I_OP_ABS,
+	I_OP_LOG,
+	I_OP_LOG10,
+	I_OP_SIN,
+	I_OP_COS,
+	I_OP_TAN,
+	I_OP_FLOOR,
+	I_OP_CEIL,
+	I_OP_SQRT,
+	I_OP_RAND,
+	I_OP_ISNULL,
+	I_OP_STRICTEQ,
+	I_OP_NOOP3 = 61,
+	I_OP_NOOP2 = 62,
+	I_OP_NOOP1 = 63
+};
+
 const LEnum all[512] = {
 	{"false", 0b000000000},
 	{"true", 0b000000001},
@@ -280,9 +341,9 @@ const LEnum all[512] = {
 	{"@thisy", 0b100010000},
 	{"@counter", 0b100010001},
 	{"@time", 0b100010010},
-	{"@unit", 0b100010011},
-	[508] = {"NATIVEDOUBLE", 0b111111100},	// double constant
-	{"\"", 0b111111101},					// string literal
-	{"0x", 0b111111110},					// native int constant
-	{"NATIVELINK", 0b111111111}				// native block link constant (i.e. router1)
+	{"@unit", 0b100010011}
+	//[508] = {"NATIVEDOUBLE", 0b111111100},	// double constant
+	//{"\"", 0b111111101},					// string literal
+	//{"0x", 0b111111110},					// native int constant
+	//{"NATIVELINK", 0b111111111}				// native block link constant (i.e. router1)
 };
