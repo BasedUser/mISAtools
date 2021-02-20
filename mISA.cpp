@@ -6,58 +6,59 @@
 void tryParseInstruction(std::fstream* fin, std::fstream* fout) {
 	// massive switch case to handle instructions
 	// since we're reading individual bits and instructions always start on a new byte, read one byte
-	char * stored;
+	unsigned int * stored;
 	short bits;
-	fin->read(stored,1);
+	fin->read((char *)stored,1); // IIIIDDDD ???????? ???????? ????????
+	*stored >>= 24; // 00000000 00000000 00000000 IIIIDDDD
 	bits = 4; // we have just read a byte and about to remove the first 4 bits
 	switch(*stored >> 4) {
-		// TODO: add enums
-		case 0b0000: {
+		*stored &= 0xF;
+		case I_OP: {
 			break;
 		}
-		case 0b0001: {
+		case I_SET: {
 			break;
 		}
-		case 0b0010: {
+		case I_READ: {
 			break;
 		}
-		case 0b0011: {
+		case I_WRITE: {
 			break;
 		}
-		case 0b0100: {
+		case I_DRAW: {
 			break;
 		}
-		case 0b0101: {
+		case I_PRINT: {
 			break;
 		}
-		case 0b0110: {
+		case I_DRAWFLUSH: {
 			break;
 		}
-		case 0b0111: {
+		case I_PRINTFLUSH: {
 			break;
 		}
-		case 0b1000: {
+		case I_GETLINK: {
 			break;
 		}
-		case 0b1001: {
+		case I_CONTROL: {
 			break;
 		}
-		case 0b1010: {
+		case I_RADAR: {
 			break;
 		}
-		case 0b1011: {
+		case I_SENSOR: {
 			break;
 		}
-		case 0b1100: {
+		case I_JUMP: {
 			break;
 		}
-		case 0b1101: {
+		case I_UBIND: {
 			break;
 		}
-		case 0b1110: {
+		case I_UCONTROL: {
 			break;
 		}
-		case 0b1111: {
+		case I_ULOCATE: {
 			break;
 		}
 	}
@@ -76,12 +77,12 @@ int main(int argc, char* argv[]) {
 	}
 	fin.open(argv[1], std::ios::binary);
 	if(!fin.is_open()) {
-		std::cerr << "E: Unable to open input file \"" << argv[1] << "\": Permission denied" << std::endl;
+		std::cerr << "E: Unable to open input file \"" << argv[1] << "\"" << std::endl;
 		return 1;
 	}
 	fout.open(argv[2]);
 	if(!fout.is_open()) {
-		std::cerr << "E: Unable to open output file \"" << argv[2] << "\": Permission denied" << std::endl;
+		std::cerr << "E: Unable to open output file \"" << argv[2] << "\"" << std::endl;
 		return 1;
 	}
 	while(!fin.eof()){
